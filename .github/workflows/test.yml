@@ -45,7 +45,7 @@ jobs:
             experimental: true
       
       fail-fast: false
-    
+
     # Allow experimental jobs to fail without failing the workflow
     continue-on-error: ${{ matrix.experimental == true }}
     
@@ -71,3 +71,20 @@ jobs:
         with:
           name: coverage-report
           path: .coverage
+
+
+  deploy:
+    name: Deploy to Production
+    needs: [lint, test]
+    runs-on: ubuntu-latest
+    if: |
+      github.ref == 'refs/heads/main' &&
+      github.event_name == 'push' &&
+      success()
+    
+    steps:
+      - name: Simulate deployment
+        run: |
+          echo "Deploying to production..."
+          echo "Environment: Production"
+          echo "Version: ${{ github.sha }}"
