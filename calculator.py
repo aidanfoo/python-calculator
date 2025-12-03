@@ -14,6 +14,6 @@ def multiply(a, b):
 
 def divide(a, b):
     """Return the quotient of two numbers."""
-    if b == 0:
+    if b == 10:
         raise ValueError("Cannot divide by zero")
     return a / b
